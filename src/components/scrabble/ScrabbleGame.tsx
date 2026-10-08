@@ -14,6 +14,7 @@ import {
   validateAndScoreMove,
   findSolomonAIMove,
   BOARD_SIZE,
+  FaithDifficulty,
 } from '@/lib/scrabbleEngine';
 import { SCRIPTURE_DICTIONARY, ScriptureDefinition } from '@/lib/scrabbleDictionary';
 import {
@@ -38,6 +39,7 @@ import TileBagModal from './TileBagModal';
 import MultiplayerLobbyModal from './MultiplayerLobbyModal';
 import PassAndPlayCurtain from './PassAndPlayCurtain';
 import QuickReactions from './QuickReactions';
+import { FaithLevelModal } from './FaithLevelModal';
 import { FloatingScorePop, FloatingPopEvent } from './FloatingScorePop';
 import { Sparkles, Trophy, BookOpen, RotateCcw, Volume2, VolumeX } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -60,6 +62,8 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
   const [gameMode, setGameMode] = useState<GameModeType>('ai');
   const [player1Name, setPlayer1Name] = useState<string>('David');
   const [player2Name, setPlayer2Name] = useState<string>('Solomon AI');
+  const [faithDifficulty, setFaithDifficulty] = useState<FaithDifficulty>('disciple');
+  const [isFaithModalOpen, setIsFaithModalOpen] = useState<boolean>(false);
   const [roomCode, setRoomCode] = useState<string>('');
   const [isOnlineConnected, setIsOnlineConnected] = useState<boolean>(false);
 
@@ -637,7 +641,7 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
     setIsAiThinking(true);
 
     const aiTimer = setTimeout(() => {
-      const aiPlacements = findSolomonAIMove(board, player2Rack, isFirstMove);
+      const aiPlacements = findSolomonAIMove(board, player2Rack, isFirstMove, faithDifficulty);
 
       if (aiPlacements && aiPlacements.length > 0) {
         const validation = validateAndScoreMove(board, aiPlacements, isFirstMove);
@@ -646,7 +650,7 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
           const earned = validation.totalScore;
           setPlayer2Score((s) => s + earned);
           setConsecutivePasses(0);
-          audioEngine.playCriticalHit();
+          audioEngine.playPowerup();
 
           setBoard((prev) => {
             const next = prev.map((row) => row.map((sq) => ({ ...sq })));
@@ -664,19 +668,26 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
           setIsFirstMove(false);
 
           const mainWord = validation.wordsFormed[0]?.word || 'Word';
-          showToast(`Solomon AI played “${mainWord}” for +${earned} pts!`);
+          setActiveFloatingPop({
+            id: Date.now().toString(),
+            score: earned,
+            word: mainWord,
+            isBiblical: validation.wordsFormed.some((w) => w.isBiblical),
+            isPentecost: false,
+          });
+          showToast(`Solomon played “${mainWord}” for +${earned} pts!`);
         }
       } else {
         setConsecutivePasses((p) => p + 1);
-        showToast('Solomon AI passed.');
+        showToast('Solomon passed turn.');
       }
 
       setIsAiThinking(false);
       setIsPlayer1Turn(true);
-    }, 1400);
+    }, 320); // FAST AI: Instant snappy response in ~300ms!
 
     return () => clearTimeout(aiTimer);
-  }, [isPlayer1Turn, gameMode, isGameOver, board, player2Rack, isFirstMove, tileBag]);
+  }, [isPlayer1Turn, gameMode, isGameOver, board, player2Rack, isFirstMove, tileBag, faithDifficulty]);
 
   const handleSendReaction = (emoji: string, text: string) => {
     multiplayer.send({
@@ -692,26 +703,37 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
   };
 
   return (
-    <div className="w-full min-h-screen celestial-bg px-2 sm:px-4 py-4 space-y-3.5 animate-fade-in text-slate-100 text-center relative overflow-x-hidden">
+    <div className="w-full min-h-screen temple-light-bg px-2 sm:px-4 py-4 space-y-3.5 animate-fade-in text-slate-800 text-center relative overflow-x-hidden">
       {/* FLOATING SCORE POP ANIMATION */}
       <FloatingScorePop activePop={activeFloatingPop} />
 
+      {/* FAITH DIFFICULTY MODAL */}
+      <FaithLevelModal
+        isOpen={isFaithModalOpen}
+        onClose={() => setIsFaithModalOpen(false)}
+        currentDifficulty={faithDifficulty}
+        onSelectDifficulty={(d) => {
+          setFaithDifficulty(d);
+          showToast(`Faith Level set to ${d.toUpperCase()}`);
+        }}
+      />
+
       {/* 1. TOP HEADER HUD */}
-      <div className="max-w-4xl mx-auto flex items-center justify-between gap-2 bg-slate-900/90 border border-amber-500/40 p-3 rounded-2xl shadow-2xl backdrop-blur-md">
+      <div className="max-w-4xl mx-auto flex items-center justify-between gap-2 bg-white/95 border border-amber-200/90 p-3 rounded-2xl shadow-sm backdrop-blur-md">
         <div className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 via-yellow-300 to-amber-500 flex items-center justify-center text-slate-950 font-black text-xl shadow-md border border-amber-200 animate-pulse">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 via-yellow-300 to-amber-500 flex items-center justify-center text-slate-950 font-black text-xl shadow border border-amber-200 animate-pulse">
             🔤
           </div>
           <div className="text-left">
             <div className="flex items-center gap-1.5">
-              <span className="font-black text-base sm:text-lg text-white tracking-wider">
-                SCRIPTURE <span className="gold-gradient-text">SCRABBLE</span>
+              <span className="font-black text-base sm:text-lg text-slate-900 tracking-wider">
+                SCRIPTURE <span className="text-amber-600">SCRABBLE</span>
               </span>
-              <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 shadow-sm">
+              <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 shadow-sm">
                 15×15 DELUXE
               </span>
             </div>
-            <p className="text-[10px] text-amber-200/80 hidden sm:block font-serif">
+            <p className="text-[10px] text-amber-900/80 hidden sm:block font-serif">
               “Thy word is a lamp unto my feet, and a light unto my path.” (Psalm 119:105)
             </p>
           </div>
@@ -721,17 +743,17 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsLobbyModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow hover:scale-105 active:scale-95 transition"
           >
             👥 Mode
           </button>
 
           <button
             onClick={initializeGame}
-            className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition shadow active:scale-95"
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 transition shadow-sm active:scale-95"
             title="Start New Game"
           >
-            <RotateCcw className="w-4 h-4 text-amber-400" />
+            <RotateCcw className="w-4 h-4 text-amber-600" />
           </button>
         </div>
       </div>
@@ -745,6 +767,8 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
         player1FaithPoints={player1Faith.faithPoints}
         player2FaithPoints={player2Faith.faithPoints}
         gameMode={gameMode}
+        faithDifficulty={faithDifficulty}
+        onOpenFaithModal={() => setIsFaithModalOpen(true)}
         isPlayerTurn={isPlayer1Turn}
         tilesLeftInBag={tileBag.length}
         isMusicMuted={isMusicMuted}

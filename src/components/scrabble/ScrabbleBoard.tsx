@@ -61,17 +61,17 @@ export default function ScrabbleBoard({
   const getMultiplierStyle = (multiplier: MultiplierType) => {
     switch (multiplier) {
       case 'TW':
-        return 'bg-gradient-to-br from-red-600 via-red-500 to-rose-700 text-white border-red-400/60 shadow-inner font-black'; // Red 3W
+        return 'bg-gradient-to-br from-red-500 via-rose-500 to-red-600 text-white border-red-300 shadow-sm font-black'; // Red 3W
       case 'DW':
-        return 'bg-gradient-to-br from-pink-600 via-pink-500 to-rose-400 text-white border-pink-300/60 shadow-inner font-black'; // Pink 2W
+        return 'bg-gradient-to-br from-pink-400 via-rose-400 to-pink-500 text-white border-pink-200 shadow-sm font-black'; // Pink 2W
       case 'TL':
-        return 'bg-gradient-to-br from-blue-600 via-indigo-600 to-blue-700 text-white border-blue-400/60 shadow-inner font-black'; // Dark Blue 3L
+        return 'bg-gradient-to-br from-blue-500 via-indigo-500 to-blue-600 text-white border-blue-200 shadow-sm font-black'; // Dark Blue 3L
       case 'DL':
-        return 'bg-gradient-to-br from-sky-400 via-cyan-400 to-teal-400 text-slate-950 border-sky-200/80 shadow-inner font-black'; // Light Blue 2L
+        return 'bg-gradient-to-br from-sky-300 via-cyan-300 to-teal-300 text-slate-900 border-sky-200 shadow-sm font-black'; // Light Blue 2L
       case 'CENTER':
-        return 'bg-gradient-to-br from-amber-400 via-yellow-300 to-amber-500 text-amber-950 border-yellow-200 shadow-inner font-black'; // Center Star (Gold)
+        return 'bg-gradient-to-br from-amber-400 via-yellow-300 to-amber-500 text-amber-950 border-yellow-200 shadow-sm font-black'; // Center Star (Gold)
       default:
-        return 'bg-[#0f172a] border-slate-800/80 text-slate-500/70';
+        return 'bg-[#fcfaf6] border-slate-300/70 text-slate-400 hover:border-amber-400';
     }
   };
 
@@ -95,7 +95,7 @@ export default function ScrabbleBoard({
   return (
     <div className="flex flex-col items-center justify-center select-none w-full max-w-[620px] mx-auto">
       {/* COLUMN HEADERS (A-O) */}
-      <div className="grid grid-cols-[20px_repeat(15,1fr)] w-full text-center text-[9px] sm:text-[10px] font-bold text-amber-300/90 mb-0.5">
+      <div className="grid grid-cols-[20px_repeat(15,1fr)] w-full text-center text-[9px] sm:text-[10px] font-bold text-slate-600 mb-0.5">
         <div /> {/* Top-left empty corner */}
         {COLUMN_HEADERS.map((col) => (
           <div key={col} className="py-0.5 font-mono">
@@ -105,10 +105,10 @@ export default function ScrabbleBoard({
       </div>
 
       {/* 15x15 BOARD GRID */}
-      <div className={`w-full p-1.5 sm:p-2.5 rounded-2xl border-4 border-[#78350f] shadow-2xl relative transition-all duration-500 ${
+      <div className={`w-full p-1.5 sm:p-2.5 rounded-2xl border-4 border-[#854d0e] shadow-xl relative transition-all duration-500 ${
         isPentecostActive
-          ? 'bg-gradient-to-b from-[#1a0f08] via-[#0d0914] to-[#120703] ring-4 ring-orange-500 shadow-[0_0_30px_rgba(249,115,22,0.5)]'
-          : 'bg-gradient-to-b from-[#1a140d] via-[#0a0f1d] to-[#0f172a] ring-1 ring-amber-500/30'
+          ? 'bg-gradient-to-b from-orange-50 via-amber-50 to-orange-100 ring-4 ring-orange-500 shadow-[0_0_25px_rgba(249,115,22,0.4)]'
+          : 'bg-gradient-to-b from-[#fbf8f2] to-[#f4ede0] ring-1 ring-amber-400/40'
       }`}>
         {/* Golden Corner Stud Accents */}
         <div className="absolute top-1 left-1 w-2 h-2 rounded-full bg-amber-400 border border-yellow-200 shadow-sm pointer-events-none" />

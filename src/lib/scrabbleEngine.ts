@@ -432,24 +432,84 @@ export function validateAndScoreMove(
   };
 }
 
+export type FaithDifficulty = 'mustard_seed' | 'disciple' | 'prophet' | 'patriarch';
+
+export interface FaithDifficultyInfo {
+  id: FaithDifficulty;
+  name: string;
+  subtitle: string;
+  icon: string;
+  description: string;
+  verse: string;
+}
+
+export const FAITH_DIFFICULTIES: FaithDifficultyInfo[] = [
+  {
+    id: 'mustard_seed',
+    name: 'Mustard Seed',
+    subtitle: 'Gentle (Easy)',
+    icon: '🌱',
+    description: 'Plays shorter 2-4 letter gentle words. Great for beginners.',
+    verse: '“If ye have faith as a grain of mustard seed...” (Matt 17:20)',
+  },
+  {
+    id: 'disciple',
+    name: 'Disciple',
+    subtitle: 'Balanced (Medium)',
+    icon: '📜',
+    description: 'Forms balanced 3-5 letter words with steady board growth.',
+    verse: '“Lord, increase our faith.” (Luke 17:5)',
+  },
+  {
+    id: 'prophet',
+    name: 'Prophet',
+    subtitle: 'Bold (Hard)',
+    icon: '⚡',
+    description: 'Searches for high-scoring Scripture words & premium multipliers.',
+    verse: '“By faith they subdued kingdoms...” (Heb 11:33)',
+  },
+  {
+    id: 'patriarch',
+    name: 'Patriarch',
+    subtitle: 'Grandmaster (Master)',
+    icon: '👑',
+    description: 'Solomon’s Wisdom: Optimal bingos, Scripture bonuses, and maximum scores.',
+    verse: '“Wisdom and knowledge is granted unto thee...” (2 Chron 1:12)',
+  },
+];
+
 /**
  * AI Move Finder ("Solomon AI")
  * Scans board anchor squares and evaluates valid biblical word placements
+ * based on selected Faith Difficulty.
  */
 export function findSolomonAIMove(
   board: BoardSquare[][],
   aiRack: ScrabbleTile[],
-  isFirstMove: boolean
+  isFirstMove: boolean,
+  difficulty: FaithDifficulty = 'disciple'
 ): PlacedTile[] | null {
   const rackLetters = aiRack.map((t) => t.letter);
 
   // Candidate Scripture words to test
-  const candidateWords = Object.keys(SCRIPTURE_DICTIONARY).sort((a, b) => b.length - a.length);
+  let candidateWords = Object.keys(SCRIPTURE_DICTIONARY);
+
+  // Filter word complexity according to Faith Level
+  if (difficulty === 'mustard_seed') {
+    candidateWords = candidateWords.filter((w) => w.length <= 4).sort(() => Math.random() - 0.5);
+  } else if (difficulty === 'disciple') {
+    candidateWords = candidateWords.filter((w) => w.length <= 5).sort((a, b) => b.length - a.length);
+  } else {
+    // Prophet & Patriarch test all words sorted by length & point value
+    candidateWords.sort((a, b) => b.length - a.length);
+  }
+
+  const validFoundMoves: { placements: PlacedTile[]; score: number }[] = [];
 
   if (isFirstMove) {
     // Try to place a word starting or centered on (7,7)
     for (const word of candidateWords) {
-      if (word.length <= rackLetters.length && word.length >= 3 && word.length <= 7) {
+      if (word.length <= rackLetters.length && word.length >= 2 && word.length <= 7) {
         // Check if rack has all letters
         const tempRack = [...rackLetters];
         let canForm = true;
@@ -476,7 +536,14 @@ export function findSolomonAIMove(
               tile: wordTiles[i],
             });
           }
-          return placements;
+
+          const validation = validateAndScoreMove(board, placements, true);
+          if (validation.isValid) {
+            validFoundMoves.push({ placements, score: validation.totalScore });
+            if (difficulty === 'mustard_seed' || difficulty === 'disciple') {
+              return placements;
+            }
+          }
         }
       }
     }
@@ -486,13 +553,13 @@ export function findSolomonAIMove(
       for (let c = 0; c < BOARD_SIZE; c++) {
         const existingTile = board[r][c].tile;
         if (existingTile) {
-          // Try to form a word using existingTile.letter
           const pivotChar = existingTile.letter;
 
           for (const word of candidateWords) {
             const pivotIndex = word.indexOf(pivotChar);
-            if (pivotIndex !== -1 && word.length <= 6) {
-              // Check if remaining letters can be supplied by rack
+            const maxWordLen = difficulty === 'mustard_seed' ? 4 : difficulty === 'disciple' ? 6 : 8;
+
+            if (pivotIndex !== -1 && word.length <= maxWordLen) {
               const neededLetters = word.slice(0, pivotIndex) + word.slice(pivotIndex + 1);
               const tempRack = [...rackLetters];
               let canForm = true;
@@ -534,7 +601,10 @@ export function findSolomonAIMove(
                   if (validSpace && placements.length > 0) {
                     const validation = validateAndScoreMove(board, placements, false);
                     if (validation.isValid) {
-                      return placements;
+                      validFoundMoves.push({ placements, score: validation.totalScore });
+                      if (difficulty === 'mustard_seed' || (difficulty === 'disciple' && validFoundMoves.length >= 2)) {
+                        return placements;
+                      }
                     }
                   }
                 }
@@ -544,6 +614,12 @@ export function findSolomonAIMove(
         }
       }
     }
+  }
+
+  if (validFoundMoves.length > 0) {
+    // Return highest scoring move for hard difficulties
+    validFoundMoves.sort((a, b) => b.score - a.score);
+    return validFoundMoves[0].placements;
   }
 
   return null;
