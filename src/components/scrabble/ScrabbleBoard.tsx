@@ -57,21 +57,21 @@ export default function ScrabbleBoard({
     }
   };
 
-  // Helper for multiplier badge colors
+  // Helper for multiplier badge colors matching the Twitter showcase mockup
   const getMultiplierStyle = (multiplier: MultiplierType) => {
     switch (multiplier) {
       case 'TW':
-        return 'bg-gradient-to-br from-red-500 via-rose-500 to-red-600 text-white border-red-300 shadow-sm font-black'; // Red 3W
+        return 'neon-tw-tile'; // Red 3W
       case 'DW':
-        return 'bg-gradient-to-br from-pink-400 via-rose-400 to-pink-500 text-white border-pink-200 shadow-sm font-black'; // Pink 2W
+        return 'neon-dw-tile'; // Pink 2W
       case 'TL':
-        return 'bg-gradient-to-br from-blue-500 via-indigo-500 to-blue-600 text-white border-blue-200 shadow-sm font-black'; // Dark Blue 3L
+        return 'neon-tl-tile'; // Dark Blue 3L
       case 'DL':
-        return 'bg-gradient-to-br from-sky-300 via-cyan-300 to-teal-300 text-slate-900 border-sky-200 shadow-sm font-black'; // Light Blue 2L
+        return 'neon-dl-tile'; // Light Blue 2L
       case 'CENTER':
-        return 'bg-gradient-to-br from-amber-400 via-yellow-300 to-amber-500 text-amber-950 border-yellow-200 shadow-sm font-black'; // Center Star (Gold)
+        return 'neon-center-star'; // Gold Center Star
       default:
-        return 'bg-[#fcfaf6] border-slate-300/70 text-slate-400 hover:border-amber-400';
+        return 'wood-grid-square text-amber-200/40';
     }
   };
 
@@ -95,32 +95,34 @@ export default function ScrabbleBoard({
   return (
     <div className="flex flex-col items-center justify-center select-none w-full max-w-[620px] mx-auto">
       {/* COLUMN HEADERS (A-O) */}
-      <div className="grid grid-cols-[20px_repeat(15,1fr)] w-full text-center text-[9px] sm:text-[10px] font-bold text-slate-600 mb-0.5">
+      <div className="grid grid-cols-[20px_repeat(15,1fr)] w-full text-center text-[10px] sm:text-xs font-serif font-black text-[#854d0e] mb-1">
         <div /> {/* Top-left empty corner */}
         {COLUMN_HEADERS.map((col) => (
-          <div key={col} className="py-0.5 font-mono">
+          <div key={col} className="py-0.5 tracking-wider">
             {col}
           </div>
         ))}
       </div>
 
-      {/* 15x15 BOARD GRID */}
-      <div className={`w-full p-1.5 sm:p-2.5 rounded-2xl border-4 border-[#854d0e] shadow-xl relative transition-all duration-500 ${
-        isPentecostActive
-          ? 'bg-gradient-to-b from-orange-50 via-amber-50 to-orange-100 ring-4 ring-orange-500 shadow-[0_0_25px_rgba(249,115,22,0.4)]'
-          : 'bg-gradient-to-b from-[#fbf8f2] to-[#f4ede0] ring-1 ring-amber-400/40'
-      }`}>
+      {/* 15x15 BOARD GRID WITH 3D WALNUT WOOD FRAME */}
+      <div
+        className={`w-full p-2 sm:p-3 rounded-2xl wood-board-bezel relative transition-all duration-500 ${
+          isPentecostActive
+            ? 'ring-4 ring-orange-500 shadow-[0_0_35px_rgba(249,115,22,0.6)]'
+            : ''
+        }`}
+      >
         {/* Golden Corner Stud Accents */}
-        <div className="absolute top-1 left-1 w-2 h-2 rounded-full bg-amber-400 border border-yellow-200 shadow-sm pointer-events-none" />
-        <div className="absolute top-1 right-1 w-2 h-2 rounded-full bg-amber-400 border border-yellow-200 shadow-sm pointer-events-none" />
-        <div className="absolute bottom-1 left-1 w-2 h-2 rounded-full bg-amber-400 border border-yellow-200 shadow-sm pointer-events-none" />
-        <div className="absolute bottom-1 right-1 w-2 h-2 rounded-full bg-amber-400 border border-yellow-200 shadow-sm pointer-events-none" />
+        <div className="absolute top-1.5 left-1.5 w-2 h-2 rounded-full bg-amber-400 border border-yellow-200 shadow-sm pointer-events-none" />
+        <div className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-amber-400 border border-yellow-200 shadow-sm pointer-events-none" />
+        <div className="absolute bottom-1.5 left-1.5 w-2 h-2 rounded-full bg-amber-400 border border-yellow-200 shadow-sm pointer-events-none" />
+        <div className="absolute bottom-1.5 right-1.5 w-2 h-2 rounded-full bg-amber-400 border border-yellow-200 shadow-sm pointer-events-none" />
 
-        <div className="grid grid-cols-[20px_repeat(15,1fr)] gap-[1.5px] sm:gap-[2px]">
+        <div className="grid grid-cols-[20px_repeat(15,1fr)] gap-[1.5px] sm:gap-[2.5px]">
           {board.map((row, rIdx) => (
             <React.Fragment key={rIdx}>
               {/* ROW NUMBER (1-15) */}
-              <div className="flex items-center justify-center text-[9px] sm:text-[10px] font-mono font-bold text-amber-300/90">
+              <div className="flex items-center justify-center text-[10px] sm:text-xs font-serif font-black text-amber-400/90 pr-0.5">
                 {rIdx + 1}
               </div>
 
@@ -148,19 +150,19 @@ export default function ScrabbleBoard({
                     }}
                     onDragOver={handleDragOver}
                     onDrop={(e) => handleDrop(e, rIdx, cIdx)}
-                    className={`aspect-square rounded-[3px] sm:rounded-md border flex flex-col items-center justify-center relative transition-all cursor-pointer select-none ${
+                    className={`aspect-square rounded-[3px] sm:rounded-md flex flex-col items-center justify-center relative transition-all cursor-pointer select-none ${
                       canClearTile
-                        ? 'bg-cyan-950/90 border-cyan-400 ring-2 ring-cyan-400 animate-pulse hover:bg-red-900 hover:border-red-400'
+                        ? 'bg-cyan-950/90 border border-cyan-400 ring-2 ring-cyan-400 animate-pulse hover:bg-red-900 hover:border-red-400 z-20'
                         : isHighlighted
-                        ? 'ring-2 ring-amber-400 shadow-[0_0_14px_rgba(251,191,36,0.9)] z-10 animate-pulse'
+                        ? 'ring-2 ring-amber-400 shadow-[0_0_14px_rgba(251,191,36,0.95)] z-20 animate-pulse'
                         : ''
                     } ${
                       tile
                         ? isTemp
-                          ? 'scrabble-tile-temp transform scale-105 z-10'
+                          ? 'ivory-tile-3d ivory-tile-temp transform scale-105 z-10'
                           : tile.isBlank
                           ? 'bg-gradient-to-b from-amber-200 via-yellow-400 to-amber-500 border-2 border-yellow-300 text-slate-950 shadow-md ring-1 ring-yellow-400'
-                          : 'scrabble-tile-3d text-slate-950'
+                          : 'ivory-tile-3d'
                         : selectedRackTile
                         ? `${multStyle} hover:brightness-125 hover:border-amber-300`
                         : multStyle
@@ -169,10 +171,10 @@ export default function ScrabbleBoard({
                     {/* TILE LETTER & SCRABBLE POINTS */}
                     {tile ? (
                       <>
-                        <span className="text-xs sm:text-base font-black font-serif text-slate-950 leading-none">
+                        <span className="text-xs sm:text-base font-black font-serif text-[#2b180d] leading-none">
                           {tile.isBlank ? '★' : tile.letter}
                         </span>
-                        <span className="text-[6px] sm:text-[8px] font-bold text-amber-900 absolute bottom-0.5 right-0.5 leading-none">
+                        <span className="text-[6px] sm:text-[8px] font-bold text-[#78350f] absolute bottom-0.5 right-0.5 leading-none font-sans">
                           {tile.isBlank ? 'W' : tile.points}
                         </span>
                         {canClearTile && (
@@ -184,7 +186,7 @@ export default function ScrabbleBoard({
                     ) : (
                       /* EMPTY SQUARE WITH MULTIPLIER LABEL OR CENTER STAR */
                       <span
-                        className={`text-[7px] sm:text-[9px] font-black leading-none ${
+                        className={`text-[8px] sm:text-[10px] font-black leading-none ${
                           isCenter ? 'text-amber-950 text-xs sm:text-sm animate-pulse' : ''
                         }`}
                       >

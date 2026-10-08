@@ -703,7 +703,7 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
   };
 
   return (
-    <div className="w-full min-h-screen temple-light-bg px-2 sm:px-4 py-4 space-y-3.5 animate-fade-in text-slate-800 text-center relative overflow-x-hidden">
+    <div className="w-full min-h-screen luxury-satin-bg px-2 sm:px-4 py-3 space-y-3 animate-fade-in text-[#2b180d] text-center relative overflow-x-hidden">
       {/* FLOATING SCORE POP ANIMATION */}
       <FloatingScorePop activePop={activeFloatingPop} />
 
@@ -718,47 +718,7 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
         }}
       />
 
-      {/* 1. TOP HEADER HUD */}
-      <div className="max-w-4xl mx-auto flex items-center justify-between gap-2 bg-white/95 border border-amber-200/90 p-3 rounded-2xl shadow-sm backdrop-blur-md">
-        <div className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 via-yellow-300 to-amber-500 flex items-center justify-center text-slate-950 font-black text-xl shadow border border-amber-200 animate-pulse">
-            🔤
-          </div>
-          <div className="text-left">
-            <div className="flex items-center gap-1.5">
-              <span className="font-black text-base sm:text-lg text-slate-900 tracking-wider">
-                SCRIPTURE <span className="text-amber-600">SCRABBLE</span>
-              </span>
-              <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 shadow-sm">
-                15×15 DELUXE
-              </span>
-            </div>
-            <p className="text-[10px] text-amber-900/80 hidden sm:block font-serif">
-              “Thy word is a lamp unto my feet, and a light unto my path.” (Psalm 119:105)
-            </p>
-          </div>
-        </div>
-
-        {/* CONTROLS */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setIsLobbyModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow hover:scale-105 active:scale-95 transition"
-          >
-            👥 Mode
-          </button>
-
-          <button
-            onClick={initializeGame}
-            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 transition shadow-sm active:scale-95"
-            title="Start New Game"
-          >
-            <RotateCcw className="w-4 h-4 text-amber-600" />
-          </button>
-        </div>
-      </div>
-
-      {/* 2. HUD: SCORES & TURN CONTROLS */}
+      {/* 1. HUD: EMBOSSED LAUREL SEAL, DUAL PLAYER CARDS & ACTIONS */}
       <ScrabbleHUD
         playerScore={player1Score}
         opponentScore={player2Score}
@@ -798,7 +758,7 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
         </div>
       )}
 
-      {/* 3. 15x15 SCRABBLE BOARD */}
+      {/* 2. 15x15 SCRABBLE BOARD */}
       <ScrabbleBoard
         board={board}
         tempPlacements={tempPlacements}
@@ -811,17 +771,7 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
         onSelectPlacedTile={handleSelectPlacedTile}
       />
 
-      {/* 4. DIVINE MIRACLES DOCK */}
-      <MiraclePowersBar
-        faithState={currentActiveFaith}
-        isMyTurn={isMyTurn && !isAiThinking && !isGameOver}
-        onActivateMiracle={handleActivateMiracle}
-        targetingMode={targetingMode}
-        onCancelTargeting={() => setTargetingMode('NONE')}
-        activePropheticWord={activePropheticWord}
-      />
-
-      {/* 5. PLAYER TILE RACK */}
+      {/* 3. PLAYER TILE RACK */}
       <TileRack
         rack={currentActiveRack}
         selectedTile={selectedRackTile}
@@ -831,6 +781,16 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
         onRecall={handleRecallTiles}
         onOpenSwapModal={() => setIsSwapModalOpen(true)}
         disabled={!isMyTurn || isAiThinking || isGameOver}
+      />
+
+      {/* 4. DIVINE MIRACLES DOCK */}
+      <MiraclePowersBar
+        faithState={currentActiveFaith}
+        isMyTurn={isMyTurn && !isAiThinking && !isGameOver}
+        onActivateMiracle={handleActivateMiracle}
+        targetingMode={targetingMode}
+        onCancelTargeting={() => setTargetingMode('NONE')}
+        activePropheticWord={activePropheticWord}
       />
 
       {/* 5. MULTIPLAYER LOBBY MODAL */}

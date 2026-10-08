@@ -2,184 +2,190 @@
 
 @layer base {
   :root {
-    --bg-main: #f8fafc;
+    --bg-main: #fbf8f1;
     --card-bg: #ffffff;
-    --card-border: #e2e8f0;
-    --gold: #d97706;
-    --gold-light: #fef3c7;
+    --card-border: #e6dfd1;
+    --gold: #c28829;
+    --gold-light: #fef8ee;
     --parchment: #fdfbf7;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
+    --text-primary: #2d1c0f;
+    --text-secondary: #634b35;
   }
 
   body {
     background-color: var(--bg-main);
     color: var(--text-primary);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Cinzel', 'Trajan Pro', Georgia, Cambria, 'Times New Roman', serif, system-ui;
     user-select: none;
     -webkit-user-select: none;
     overflow-x: hidden;
   }
 }
 
-/* Custom Game Aesthetics & Keyframes */
-
-@keyframes flamePulse {
-  0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.6));
-  }
-  50% {
-    transform: scale(1.12);
-    filter: drop-shadow(0 0 16px rgba(239, 68, 68, 0.9));
-  }
+/* Luxury Satin & Golden Ray Canvas Background */
+.luxury-satin-bg {
+  background-color: #f7f3e8;
+  background-image: 
+    radial-gradient(ellipse at 50% 10%, rgba(254, 243, 199, 0.9) 0%, rgba(247, 243, 232, 0.4) 65%),
+    radial-gradient(ellipse at 95% 20%, rgba(217, 119, 6, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 5% 30%, rgba(245, 158, 11, 0.1) 0%, transparent 55%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(243, 235, 218, 0.8) 100%);
+  background-attachment: fixed;
+  background-size: cover;
 }
 
-@keyframes goldShimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+/* 3D Walnut Wood Board Bezel */
+.wood-board-bezel {
+  background: linear-gradient(145deg, #422616 0%, #2f190d 50%, #221107 100%);
+  border: 5px solid #5a351e;
+  box-shadow: 
+    0 18px 38px -10px rgba(45, 23, 10, 0.5),
+    0 8px 16px rgba(0, 0, 0, 0.35),
+    inset 0 2px 4px rgba(255, 255, 255, 0.18),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.8);
 }
 
-@keyframes floatGentle {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+/* Dark Wood Grid Squares */
+.wood-grid-square {
+  background: linear-gradient(135deg, #442a1a 0%, #351f11 50%, #28170c 100%);
+  border: 1px solid #533420;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes popIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.85);
-  }
-  70% {
-    transform: scale(1.05);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+.wood-grid-square:hover {
+  background: linear-gradient(135deg, #573722 0%, #442816 100%);
 }
 
-@keyframes glowBorder {
-  0%, 100% {
-    border-color: rgba(245, 158, 11, 0.4);
-    box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
-  }
-  50% {
-    border-color: rgba(245, 158, 11, 0.8);
-    box-shadow: 0 0 24px rgba(245, 158, 11, 0.4);
-  }
-}
-
-/* Game Utilities */
-.animate-flame {
-  animation: flamePulse 1.4s infinite ease-in-out;
-}
-
-.animate-float {
-  animation: floatGentle 3s infinite ease-in-out;
-}
-
-.animate-pop {
-  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-.glow-gold-box {
-  animation: glowBorder 2.5s infinite ease-in-out;
-}
-
-.gold-gradient-text {
-  background: linear-gradient(135deg, #FFFBEB 0%, #FBBF24 50%, #D97706 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.gold-shimmer-btn {
-  background: linear-gradient(90deg, #d97706, #f59e0b, #fbbf24, #d97706);
-  background-size: 300% 100%;
-  animation: goldShimmer 4s infinite linear;
-}
-
-/* Game Card Style */
-.game-panel {
-  background: radial-gradient(140% 140% at 50% 0%, #17233c 0%, #0d1527 100%);
-  border: 1px solid rgba(245, 158, 11, 0.2);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.parchment-panel {
-  background: linear-gradient(180deg, #fbf7ee 0%, #f4ede0 100%);
-  color: #1e293b;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.8);
-  border: 2px solid #d4c5a9;
-}
-
-/* Tactile 3D Buttons */
-.btn-game-primary {
-  background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
-  box-shadow: 0 5px 0 #92400e, 0 8px 16px rgba(0,0,0,0.4);
-  transition: all 0.1s ease;
-}
-
-.btn-game-primary:hover {
-  filter: brightness(1.08);
-}
-
-.btn-game-primary:active {
-  transform: translateY(4px);
-  box-shadow: 0 1px 0 #92400e, 0 3px 8px rgba(0,0,0,0.4);
-}
-
-/* 3D Scrabble Letter Tiles */
-.scrabble-tile-3d {
-  background: linear-gradient(145deg, #fffdf8 0%, #fef3c7 45%, #fde68a 100%);
-  border: 1.5px solid #b45309;
-  box-shadow: 0 4px 0 #92400e, 0 6px 12px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+/* 3D Carved Ivory Scrabble Letter Tiles */
+.ivory-tile-3d {
+  background: linear-gradient(145deg, #ffffff 0%, #faf6ec 45%, #f2ebda 100%);
+  border: 1px solid #dcd4c3;
+  box-shadow: 
+    0 3.5px 0 #b3a792,
+    0 5px 10px rgba(35, 20, 10, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+  color: #2b180d;
   transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.15s ease;
 }
 
-.scrabble-tile-3d:hover {
+.ivory-tile-3d:hover {
   transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 7px 0 #92400e, 0 10px 18px rgba(245, 158, 11, 0.35);
+  box-shadow: 
+    0 6.5px 0 #b3a792,
+    0 8px 16px rgba(180, 83, 9, 0.25);
 }
 
-.scrabble-tile-3d:active {
+.ivory-tile-3d:active {
   transform: translateY(2px) scale(0.98);
-  box-shadow: 0 2px 0 #92400e, 0 3px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1.5px 0 #b3a792, 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-.scrabble-tile-temp {
-  background: linear-gradient(145deg, #fef9c3 0%, #fde047 50%, #eab308 100%) !important;
-  border: 2px solid #ca8a04 !important;
-  box-shadow: 0 0 15px rgba(234, 179, 8, 0.8), 0 4px 0 #854d0e !important;
+/* Temporary placed tiles on current turn */
+.ivory-tile-temp {
+  background: linear-gradient(145deg, #fffbeb 0%, #fef08a 45%, #fde047 100%) !important;
+  border: 1.5px solid #eab308 !important;
+  box-shadow: 
+    0 3.5px 0 #ca8a04,
+    0 0 14px rgba(234, 179, 8, 0.75) !important;
   animation: tileGlowPulse 1.8s infinite ease-in-out;
 }
 
 @keyframes tileGlowPulse {
   0%, 100% {
-    box-shadow: 0 0 12px rgba(234, 179, 8, 0.6), 0 3px 0 #854d0e;
+    box-shadow: 0 3px 0 #ca8a04, 0 0 10px rgba(234, 179, 8, 0.5);
   }
   50% {
-    box-shadow: 0 0 22px rgba(251, 191, 36, 0.9), 0 4px 0 #854d0e;
+    box-shadow: 0 4px 0 #ca8a04, 0 0 20px rgba(251, 191, 36, 0.9);
   }
+}
+
+/* Neon Jewel Multiplier Tiles (TW, DW, TL, DL) */
+.neon-tw-tile {
+  background: linear-gradient(135deg, #ff4444 0%, #e60000 60%, #b30000 100%);
+  border: 1.5px solid #ff7777;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  font-weight: 900;
+}
+
+.neon-dw-tile {
+  background: linear-gradient(135deg, #ff66b2 0%, #ec4899 60%, #be185d 100%);
+  border: 1.5px solid #ff99cc;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.75), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  font-weight: 900;
+}
+
+.neon-tl-tile {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 60%, #1e3a8a 100%);
+  border: 1.5px solid #60a5fa;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  font-weight: 900;
+}
+
+.neon-dl-tile {
+  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 60%, #0e7490 100%);
+  border: 1.5px solid #67e8f9;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  font-weight: 900;
+}
+
+.neon-center-star {
+  background: linear-gradient(135deg, #fef08a 0%, #eab308 50%, #ca8a04 100%);
+  border: 2px solid #fde047;
+  color: #713f12;
+  box-shadow: 0 0 18px rgba(234, 179, 8, 0.95), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  font-weight: 900;
+}
+
+/* Embossed Oval Header Plaque */
+.laurel-seal-plaque {
+  background: linear-gradient(180deg, #ffffff 0%, #fbf8f1 60%, #f4eee1 100%);
+  border: 2px solid #cca25d;
+  box-shadow: 
+    0 6px 18px rgba(100, 65, 25, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 1px 1px #ffffff;
+}
+
+/* Rounded Pill HUD Badges */
+.hud-pill-card {
+  background: linear-gradient(180deg, #ffffff 0%, #fdfbf7 100%);
+  border: 1.5px solid #e7dac5;
+  box-shadow: 0 4px 12px rgba(90, 60, 20, 0.08), inset 0 1px 0 #ffffff;
+}
+
+/* Miracle Bottom Pill Buttons */
+.miracle-pill-btn {
+  background: linear-gradient(180deg, #ffffff 0%, #fcf9f2 100%);
+  border: 1.5px solid #e2d3bc;
+  box-shadow: 0 3px 6px rgba(70, 45, 15, 0.08), inset 0 1px 0 #ffffff;
+  transition: all 0.15s ease;
+}
+
+.miracle-pill-btn:hover {
+  background: linear-gradient(180deg, #fffdf8 0%, #fbf1de 100%);
+  border-color: #cca25d;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(194, 136, 41, 0.25);
+}
+
+.miracle-pill-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(70, 45, 15, 0.1);
 }
 
 /* Floating Score Burst Animation */
 @keyframes floatScoreBurst {
   0% {
     opacity: 0;
-    transform: translate(-50%, 0) scale(0.5);
+    transform: translate(-50%, 0) scale(0.6);
   }
   20% {
     opacity: 1;
-    transform: translate(-50%, -20px) scale(1.25);
+    transform: translate(-50%, -20px) scale(1.2);
   }
   75% {
     opacity: 1;
@@ -195,17 +201,20 @@
   animation: floatScoreBurst 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Sacred Light Mode Theme Background */
-.temple-light-bg {
-  background-color: #fdfbf7;
-  background-image: 
-    radial-gradient(circle at 50% -10%, rgba(245, 158, 11, 0.12) 0%, transparent 60%),
-    radial-gradient(circle at 10% 40%, rgba(217, 119, 6, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 90% 70%, rgba(14, 165, 233, 0.05) 0%, transparent 50%),
-    radial-gradient(2px 2px at 30px 40px, rgba(217, 119, 6, 0.3), rgba(0,0,0,0)),
-    radial-gradient(2px 2px at 120px 90px, rgba(245, 158, 11, 0.25), rgba(0,0,0,0)),
-    radial-gradient(1.5px 1.5px at 200px 150px, rgba(217, 119, 6, 0.2), rgba(0,0,0,0));
-  background-size: 100% 100%, 100% 100%, 100% 100%, 350px 350px, 400px 400px, 300px 300px;
+/* Tactile 3D Buttons */
+.btn-game-primary {
+  background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
+  box-shadow: 0 4px 0 #92400e, 0 6px 12px rgba(0,0,0,0.25);
+  transition: all 0.1s ease;
+}
+
+.btn-game-primary:hover {
+  filter: brightness(1.06);
+}
+
+.btn-game-primary:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #92400e, 0 2px 6px rgba(0,0,0,0.2);
 }
 
 /* Custom Scrollbar */
@@ -215,14 +224,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #f7f3e8;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #d8cca8;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d97706;
+  background: #c28829;
 }
