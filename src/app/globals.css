@@ -137,36 +137,77 @@
   box-shadow: 0 1px 0 #92400e, 0 3px 8px rgba(0,0,0,0.4);
 }
 
-.btn-game-option {
-  background: #151f33;
-  border: 2px solid #23334e;
-  box-shadow: 0 4px 0 #0d1524, 0 6px 12px rgba(0,0,0,0.3);
-  transition: all 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+/* 3D Scrabble Letter Tiles */
+.scrabble-tile-3d {
+  background: linear-gradient(145deg, #fffdf8 0%, #fef3c7 45%, #fde68a 100%);
+  border: 1.5px solid #b45309;
+  box-shadow: 0 4px 0 #92400e, 0 6px 12px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.15s ease;
 }
 
-.btn-game-option:hover {
-  background: #1c2b48;
-  border-color: #3b5074;
-  transform: translateY(-2px);
+.scrabble-tile-3d:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 7px 0 #92400e, 0 10px 18px rgba(245, 158, 11, 0.35);
 }
 
-.btn-game-option:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 #0d1524;
+.scrabble-tile-3d:active {
+  transform: translateY(2px) scale(0.98);
+  box-shadow: 0 2px 0 #92400e, 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
-.btn-option-correct {
-  background: linear-gradient(180deg, #059669 0%, #047857 100%) !important;
-  border-color: #34d399 !important;
-  box-shadow: 0 4px 0 #064e3b, 0 0 20px rgba(16, 185, 129, 0.4) !important;
-  color: #ffffff !important;
+.scrabble-tile-temp {
+  background: linear-gradient(145deg, #fef9c3 0%, #fde047 50%, #eab308 100%) !important;
+  border: 2px solid #ca8a04 !important;
+  box-shadow: 0 0 15px rgba(234, 179, 8, 0.8), 0 4px 0 #854d0e !important;
+  animation: tileGlowPulse 1.8s infinite ease-in-out;
 }
 
-.btn-option-wrong {
-  background: linear-gradient(180deg, #dc2626 0%, #b91c1c 100%) !important;
-  border-color: #f87171 !important;
-  box-shadow: 0 4px 0 #7f1d1d, 0 0 20px rgba(239, 68, 68, 0.4) !important;
-  color: #ffffff !important;
+@keyframes tileGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(234, 179, 8, 0.6), 0 3px 0 #854d0e;
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(251, 191, 36, 0.9), 0 4px 0 #854d0e;
+  }
+}
+
+/* Floating Score Burst Animation */
+@keyframes floatScoreBurst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -20px) scale(1.25);
+  }
+  75% {
+    opacity: 1;
+    transform: translate(-50%, -50px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -70px) scale(0.8);
+  }
+}
+
+.animate-score-burst {
+  animation: floatScoreBurst 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Celestial Star Dust Particles */
+.celestial-bg {
+  background-color: #060a14;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(217, 119, 6, 0.15) 0%, transparent 60%),
+    radial-gradient(circle at 85% 30%, rgba(147, 51, 234, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 15% 70%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
+    radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 90px 80px, #ffd700, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 150px 140px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 220px 60px, #fbbf24, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 300px 180px, #ffffff, rgba(0,0,0,0));
+  background-size: 100% 100%, 100% 100%, 100% 100%, 350px 350px, 400px 400px, 300px 300px, 450px 450px, 380px 380px;
 }
 
 /* Custom Scrollbar */

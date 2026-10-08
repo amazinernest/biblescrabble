@@ -40,7 +40,7 @@ export default function OnboardingModal() {
           onClick={handleSkip}
           className="absolute top-4 right-4 text-xs font-bold text-slate-400 hover:text-amber-300 py-1 px-2.5 rounded-lg bg-slate-900/80 border border-slate-700"
         >
-          Skip & Play 3D ✕
+          Skip ✕
         </button>
 
         {/* Background glow */}

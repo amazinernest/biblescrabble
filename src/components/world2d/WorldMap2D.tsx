@@ -141,10 +141,10 @@ export default function WorldMap2D({ onSelectStage, onOpenMiniGame }: WorldMap2D
         >
           <div className="flex items-center justify-between mb-1">
             <span className="text-lg group-hover:scale-110 transition-transform">🔤</span>
-            <span className="text-[9px] font-black uppercase bg-emerald-900/60 px-2 py-0.5 rounded text-emerald-300">Daily</span>
+            <span className="text-[9px] font-black uppercase bg-emerald-900/60 px-2 py-0.5 rounded text-emerald-300">Scrabble</span>
           </div>
-          <h4 className="text-xs font-black text-white">Covenant Wordle</h4>
-          <p className="text-[10px] text-slate-400">5-Letter daily cipher</p>
+          <h4 className="text-xs font-black text-white">Scripture Scrabble</h4>
+          <p className="text-[10px] text-slate-400">Build biblical words</p>
         </button>
       </div>
 
