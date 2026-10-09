@@ -780,6 +780,7 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
         onShuffle={handleShuffleRack}
         onRecall={handleRecallTiles}
         onOpenSwapModal={() => setIsSwapModalOpen(true)}
+        onDropTileOnSquare={handlePlaceTileOnSquare}
         disabled={!isMyTurn || isAiThinking || isGameOver}
       />
 

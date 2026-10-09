@@ -2,14 +2,14 @@
 
 @layer base {
   :root {
-    --bg-main: #fbf8f1;
+    --bg-main: #faf8f5;
     --card-bg: #ffffff;
-    --card-border: #e6dfd1;
+    --card-border: #e8dec8;
     --gold: #c28829;
-    --gold-light: #fef8ee;
-    --parchment: #fdfbf7;
-    --text-primary: #2d1c0f;
-    --text-secondary: #634b35;
+    --gold-light: #fefbf3;
+    --parchment: #ffffff;
+    --text-primary: #1c1917;
+    --text-secondary: #57412e;
   }
 
   body {
@@ -22,62 +22,67 @@
   }
 }
 
-/* Luxury Satin & Golden Ray Canvas Background */
+/* Luxury Bright Satin & Luminous Gold Canvas Background */
 .luxury-satin-bg {
-  background-color: #f7f3e8;
+  background-color: #faf7f2;
   background-image: 
-    radial-gradient(ellipse at 50% 10%, rgba(254, 243, 199, 0.9) 0%, rgba(247, 243, 232, 0.4) 65%),
-    radial-gradient(ellipse at 95% 20%, rgba(217, 119, 6, 0.12) 0%, transparent 50%),
-    radial-gradient(ellipse at 5% 30%, rgba(245, 158, 11, 0.1) 0%, transparent 55%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(243, 235, 218, 0.8) 100%);
+    radial-gradient(ellipse at 50% 5%, rgba(255, 255, 255, 1) 0%, rgba(250, 247, 242, 0.9) 50%, rgba(243, 237, 226, 0.8) 100%),
+    radial-gradient(ellipse at 90% 15%, rgba(245, 158, 11, 0.08) 0%, transparent 45%),
+    radial-gradient(ellipse at 10% 25%, rgba(217, 119, 6, 0.06) 0%, transparent 45%),
+    linear-gradient(180deg, #ffffff 0%, #faf6ee 100%);
   background-attachment: fixed;
   background-size: cover;
 }
 
-/* 3D Walnut Wood Board Bezel */
-.wood-board-bezel {
-  background: linear-gradient(145deg, #422616 0%, #2f190d 50%, #221107 100%);
-  border: 5px solid #5a351e;
+/* Pure White Marble & Royal Gold Board Bezel */
+.wood-board-bezel,
+.temple-board-bezel {
+  background: linear-gradient(145deg, #ffffff 0%, #fdfbf7 50%, #f7f2e8 100%);
+  border: 4px solid #cca25d;
   box-shadow: 
-    0 18px 38px -10px rgba(45, 23, 10, 0.5),
-    0 8px 16px rgba(0, 0, 0, 0.35),
-    inset 0 2px 4px rgba(255, 255, 255, 0.18),
-    inset 0 -3px 8px rgba(0, 0, 0, 0.8);
+    0 16px 36px -10px rgba(180, 140, 75, 0.22),
+    0 6px 16px rgba(0, 0, 0, 0.06),
+    inset 0 2px 4px #ffffff,
+    inset 0 -2px 6px rgba(204, 162, 93, 0.3);
 }
 
-/* Dark Wood Grid Squares */
-.wood-grid-square {
-  background: linear-gradient(135deg, #442a1a 0%, #351f11 50%, #28170c 100%);
-  border: 1px solid #533420;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+/* Luminous White & Ivory Grid Squares */
+.wood-grid-square,
+.white-grid-square {
+  background: linear-gradient(135deg, #ffffff 0%, #fefcf9 60%, #f9f5ec 100%);
+  border: 1px solid #e7dcce;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: all 0.15s ease;
 }
 
-.wood-grid-square:hover {
-  background: linear-gradient(135deg, #573722 0%, #442816 100%);
+.wood-grid-square:hover,
+.white-grid-square:hover {
+  background: linear-gradient(135deg, #fffcf5 0%, #fef3df 100%);
+  border-color: #cca25d;
 }
 
-/* 3D Carved Ivory Scrabble Letter Tiles */
+/* 3D Pure Porcelain & Ivory Scrabble Letter Tiles */
 .ivory-tile-3d {
-  background: linear-gradient(145deg, #ffffff 0%, #faf6ec 45%, #f2ebda 100%);
-  border: 1px solid #dcd4c3;
+  background: linear-gradient(145deg, #ffffff 0%, #fffefc 40%, #fbf6ec 100%);
+  border: 1.5px solid #d9cdb8;
   box-shadow: 
-    0 3.5px 0 #b3a792,
-    0 5px 10px rgba(35, 20, 10, 0.35),
-    inset 0 1px 1px rgba(255, 255, 255, 0.95);
-  color: #2b180d;
+    0 3.5px 0 #c2b299,
+    0 5px 10px rgba(70, 45, 15, 0.12),
+    inset 0 1px 2px #ffffff;
+  color: #1c1917;
   transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.15s ease;
 }
 
 .ivory-tile-3d:hover {
   transform: translateY(-3px) scale(1.04);
   box-shadow: 
-    0 6.5px 0 #b3a792,
-    0 8px 16px rgba(180, 83, 9, 0.25);
+    0 6.5px 0 #c2b299,
+    0 8px 16px rgba(194, 136, 41, 0.25);
 }
 
 .ivory-tile-3d:active {
   transform: translateY(2px) scale(0.98);
-  box-shadow: 0 1.5px 0 #b3a792, 0 3px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1.5px 0 #c2b299, 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Temporary placed tiles on current turn */
@@ -86,7 +91,7 @@
   border: 1.5px solid #eab308 !important;
   box-shadow: 
     0 3.5px 0 #ca8a04,
-    0 0 14px rgba(234, 179, 8, 0.75) !important;
+    0 0 14px rgba(234, 179, 8, 0.8) !important;
   animation: tileGlowPulse 1.8s infinite ease-in-out;
 }
 
@@ -99,82 +104,82 @@
   }
 }
 
-/* Neon Jewel Multiplier Tiles (TW, DW, TL, DL) */
+/* Jewel Multiplier Tiles (TW, DW, TL, DL) - High Contrast on White */
 .neon-tw-tile {
-  background: linear-gradient(135deg, #ff4444 0%, #e60000 60%, #b30000 100%);
-  border: 1.5px solid #ff7777;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 60%, #b91c1c 100%);
+  border: 1.5px solid #fca5a5;
   color: #ffffff;
-  box-shadow: 0 0 12px rgba(239, 68, 68, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.5);
   font-weight: 900;
 }
 
 .neon-dw-tile {
-  background: linear-gradient(135deg, #ff66b2 0%, #ec4899 60%, #be185d 100%);
-  border: 1.5px solid #ff99cc;
+  background: linear-gradient(135deg, #f472b6 0%, #ec4899 60%, #db2777 100%);
+  border: 1.5px solid #fbcfe8;
   color: #ffffff;
-  box-shadow: 0 0 12px rgba(236, 72, 153, 0.75), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 6px rgba(236, 72, 153, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.5);
   font-weight: 900;
 }
 
 .neon-tl-tile {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 60%, #1e3a8a 100%);
-  border: 1.5px solid #60a5fa;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 60%, #1d4ed8 100%);
+  border: 1.5px solid #93c5fd;
   color: #ffffff;
-  box-shadow: 0 0 12px rgba(59, 130, 246, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.5);
   font-weight: 900;
 }
 
 .neon-dl-tile {
-  background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 60%, #0e7490 100%);
-  border: 1.5px solid #67e8f9;
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 60%, #0e7490 100%);
+  border: 1.5px solid #a5f3fc;
   color: #ffffff;
-  box-shadow: 0 0 12px rgba(6, 182, 212, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 6px rgba(6, 182, 212, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.5);
   font-weight: 900;
 }
 
 .neon-center-star {
-  background: linear-gradient(135deg, #fef08a 0%, #eab308 50%, #ca8a04 100%);
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
   border: 2px solid #fde047;
-  color: #713f12;
-  box-shadow: 0 0 18px rgba(234, 179, 8, 0.95), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  color: #78350f;
+  box-shadow: 0 0 14px rgba(234, 179, 8, 0.8), inset 0 1px 2px #ffffff;
   font-weight: 900;
 }
 
 /* Embossed Oval Header Plaque */
 .laurel-seal-plaque {
-  background: linear-gradient(180deg, #ffffff 0%, #fbf8f1 60%, #f4eee1 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #fdfbf7 60%, #f7f2e8 100%);
   border: 2px solid #cca25d;
   box-shadow: 
-    0 6px 18px rgba(100, 65, 25, 0.15),
-    0 1px 3px rgba(0, 0, 0, 0.08),
-    inset 0 1px 1px #ffffff;
+    0 6px 18px rgba(180, 140, 75, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    inset 0 1px 2px #ffffff;
 }
 
 /* Rounded Pill HUD Badges */
 .hud-pill-card {
-  background: linear-gradient(180deg, #ffffff 0%, #fdfbf7 100%);
-  border: 1.5px solid #e7dac5;
-  box-shadow: 0 4px 12px rgba(90, 60, 20, 0.08), inset 0 1px 0 #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #faf6ee 100%);
+  border: 1.5px solid #e8dec8;
+  box-shadow: 0 4px 14px rgba(180, 140, 75, 0.1), inset 0 1px 0 #ffffff;
 }
 
 /* Miracle Bottom Pill Buttons */
 .miracle-pill-btn {
-  background: linear-gradient(180deg, #ffffff 0%, #fcf9f2 100%);
-  border: 1.5px solid #e2d3bc;
-  box-shadow: 0 3px 6px rgba(70, 45, 15, 0.08), inset 0 1px 0 #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #faf6ee 100%);
+  border: 1.5px solid #e5d7be;
+  box-shadow: 0 3px 8px rgba(180, 140, 75, 0.12), inset 0 1px 0 #ffffff;
   transition: all 0.15s ease;
 }
 
 .miracle-pill-btn:hover {
-  background: linear-gradient(180deg, #fffdf8 0%, #fbf1de 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #fdf1de 100%);
   border-color: #cca25d;
   transform: translateY(-2px);
-  box-shadow: 0 5px 12px rgba(194, 136, 41, 0.25);
+  box-shadow: 0 6px 14px rgba(194, 136, 41, 0.25);
 }
 
 .miracle-pill-btn:active {
   transform: translateY(1px);
-  box-shadow: 0 1px 3px rgba(70, 45, 15, 0.1);
+  box-shadow: 0 1px 3px rgba(180, 140, 75, 0.15);
 }
 
 /* Floating Score Burst Animation */
@@ -204,7 +209,7 @@
 /* Tactile 3D Buttons */
 .btn-game-primary {
   background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
-  box-shadow: 0 4px 0 #92400e, 0 6px 12px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 0 #92400e, 0 6px 12px rgba(180, 140, 75, 0.25);
   transition: all 0.1s ease;
 }
 
@@ -214,7 +219,7 @@
 
 .btn-game-primary:active {
   transform: translateY(3px);
-  box-shadow: 0 1px 0 #92400e, 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 0 #92400e, 0 2px 6px rgba(180, 140, 75, 0.2);
 }
 
 /* Custom Scrollbar */
@@ -224,7 +229,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f7f3e8;
+  background: #faf7f2;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -233,5 +238,5 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #c28829;
+  background: #cca25d;
 }
