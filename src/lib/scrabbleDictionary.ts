@@ -226,6 +226,13 @@ export const SCRIPTURE_DICTIONARY: Record<string, ScriptureDefinition> = {
     verse: '“I am the vine; you are the branches. If you remain in me you will bear much fruit.”',
     reference: 'John 15:5',
   },
+  BROAD: {
+    word: 'BROAD',
+    category: 'The Way of Warning',
+    definition: 'The broad road that leads to destruction, contrasted with the narrow path of life.',
+    verse: '“For wide is the gate and broad is the road that leads to destruction, and many enter through it.”',
+    reference: 'Matthew 7:13',
+  },
 
   // --- C ---
   CAIN: {
@@ -637,6 +644,13 @@ export const SCRIPTURE_DICTIONARY: Record<string, ScriptureDefinition> = {
     verse: '“I am a Hebrew and I worship the Lord, the God of heaven, who made the sea and the dry land.”',
     reference: 'Jonah 1:9',
   },
+  HELL: {
+    word: 'HELL',
+    category: 'Place of Judgment',
+    definition: 'The realm of judgment (Gehenna/Sheol/Hades) conquered by Jesus Christ.',
+    verse: '“I am the Living One; I was dead, and now look, I am alive for ever and ever! And I hold the keys of death and Hades.”',
+    reference: 'Revelation 1:18',
+  },
   HELMET: {
     word: 'HELMET',
     category: 'Spiritual Armor',
@@ -978,6 +992,13 @@ export const SCRIPTURE_DICTIONARY: Record<string, ScriptureDefinition> = {
   },
 
   // --- N ---
+  NARROW: {
+    word: 'NARROW',
+    category: 'The Way of Life',
+    definition: 'The narrow gate and strait way leading to eternal life in Jesus Christ.',
+    verse: '“Enter through the narrow gate. For small is the gate and narrow the road that leads to life, and only a few find it.”',
+    reference: 'Matthew 7:13-14',
+  },
   NAZARETH: {
     word: 'NAZARETH',
     category: 'Hometown of Jesus',
@@ -1037,6 +1058,13 @@ export const SCRIPTURE_DICTIONARY: Record<string, ScriptureDefinition> = {
     definition: 'Sacred feast commemorating Israel’s deliverance when the angel passed over.',
     verse: '“For Christ, our Passover lamb, has been sacrificed.”',
     reference: '1 Corinthians 5:7',
+  },
+  PATH: {
+    word: 'PATH',
+    category: 'Righteous Direction',
+    definition: 'The path of righteousness and divine guidance illuminated by God’s Word.',
+    verse: '“Your word is a lamp for my feet, a light on my path.”',
+    reference: 'Psalm 119:105',
   },
   PATMOS: {
     word: 'PATMOS',
@@ -1137,6 +1165,13 @@ export const SCRIPTURE_DICTIONARY: Record<string, ScriptureDefinition> = {
     definition: 'River of the Water of Life proceeding from the throne of God.',
     verse: '“Then the angel showed me the river of the water of life, as clear as crystal, flowing from the throne of God and of the Lamb.”',
     reference: 'Revelation 22:1',
+  },
+  ROAD: {
+    word: 'ROAD',
+    category: 'Spiritual Journey',
+    definition: 'The road of faith, discipleship, and encounter with the risen Christ.',
+    verse: '“As they talked and discussed these things with each other, Jesus himself came up and walked along with them on the road.”',
+    reference: 'Luke 24:15',
   },
   ROBE: {
     word: 'ROBE',
@@ -1322,6 +1357,13 @@ export const SCRIPTURE_DICTIONARY: Record<string, ScriptureDefinition> = {
     verse: '“Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff, they comfort me.”',
     reference: 'Psalm 23:4',
   },
+  STRAIT: {
+    word: 'STRAIT',
+    category: 'Biblical Pathway',
+    definition: 'The strait and narrow entrance into the Kingdom of God.',
+    verse: '“Enter ye in at the strait gate: for wide is the gate, and broad is the way, that leadeth to destruction, and many there be which go in thereat.”',
+    reference: 'Matthew 7:13 (KJV)',
+  },
   STONE: {
     word: 'STONE',
     category: 'Foundation',
@@ -1440,6 +1482,13 @@ export const SCRIPTURE_DICTIONARY: Record<string, ScriptureDefinition> = {
   },
 
   // --- W ---
+  WALK: {
+    word: 'WALK',
+    category: 'Daily Discipleship',
+    definition: 'Living and ordering one’s conduct in faith, obedience, and the Holy Spirit.',
+    verse: '“For we walk by faith, not by sight.”',
+    reference: '2 Corinthians 5:7',
+  },
   WATER: {
     word: 'WATER',
     category: 'Living Spring',
@@ -1447,12 +1496,40 @@ export const SCRIPTURE_DICTIONARY: Record<string, ScriptureDefinition> = {
     verse: '“Whoever drinks the water I give them will never thirst. Indeed, the water I give them will become in them a spring of water welling up to eternal life.”',
     reference: 'John 4:14',
   },
+  WAY: {
+    word: 'WAY',
+    category: 'Divine Path',
+    definition: 'Jesus Christ who is the Way, the Truth, and the Life.',
+    verse: '“Jesus answered: I am the way and the truth and the life. No one comes to the Father except through me.”',
+    reference: 'John 14:6',
+  },
+  WELL: {
+    word: 'WELL',
+    category: 'Living Water Source',
+    definition: 'Jacob’s well where Jesus offered living water to the Samaritan woman.',
+    verse: '“Jacob’s well was there, and Jesus, tired as he was from the journey, sat down by the well.”',
+    reference: 'John 4:6',
+  },
   WHEAT: {
     word: 'WHEAT',
     category: 'Harvest Parable',
     definition: 'The righteous grain gathered into the Lord’s heavenly barn.',
     verse: '“He will gather his wheat into the barn, but he will burn up the chaff with unquenchable fire.”',
     reference: 'Matthew 3:12',
+  },
+  WIDE: {
+    word: 'WIDE',
+    category: 'The Way of Warning',
+    definition: 'The wide gate and broad road warned against by Christ.',
+    verse: '“Enter through the narrow gate. For wide is the gate and broad is the road that leads to destruction, and many enter through it.”',
+    reference: 'Matthew 7:13',
+  },
+  WIND: {
+    word: 'WIND',
+    category: 'Holy Spirit Breath',
+    definition: 'The sovereign movement of the Holy Spirit (Ruach / Pneuma).',
+    verse: '“The wind blows wherever it pleases. You hear its sound, but you cannot tell where it comes from or where it is going. So it is with everyone born of the Spirit.”',
+    reference: 'John 3:8',
   },
   WINE: {
     word: 'WINE',
@@ -1474,6 +1551,13 @@ export const SCRIPTURE_DICTIONARY: Record<string, ScriptureDefinition> = {
     definition: 'The living Word of God, Jesus Christ, and the written Scriptures.',
     verse: '“The Word became flesh and made his dwelling among us. We have seen his glory.”',
     reference: 'John 1:14',
+  },
+  WRATH: {
+    word: 'WRATH',
+    category: 'Divine Justice',
+    definition: 'God’s righteous indignation against sin, propitiated by Christ.',
+    verse: '“Since we have now been justified by his blood, how much more shall we be saved from God’s wrath through him!”',
+    reference: 'Romans 5:9',
   },
 
   // --- Z ---
@@ -1498,13 +1582,30 @@ export const SCRIPTURE_WORD_SET = new Set<string>(
   Object.keys(SCRIPTURE_DICTIONARY)
 );
 
-// Standard English 2-3 letter bridge words to enable seamless Scrabble cross-play
+// Standard English bridge words to enable seamless Scrabble cross-play
 const COMMON_CROSSWORDS = [
   'AN', 'AT', 'AM', 'AS', 'BE', 'BY', 'DO', 'GO', 'HE', 'IF', 'IN', 'IS', 'IT', 'ME', 'MY', 'NO', 'OF', 'ON', 'OR', 'SO', 'TO', 'UP', 'US', 'WE',
   'ALL', 'AND', 'ARE', 'ASK', 'BAD', 'BIG', 'BOY', 'BUT', 'CAN', 'DAY', 'DID', 'DIE', 'EAR', 'EAT', 'END', 'EYE', 'FAR', 'FOR', 'GET', 'HAD', 'HAS',
   'HIM', 'HIS', 'HOW', 'ILL', 'JOY', 'KEY', 'LET', 'MAN', 'MAY', 'MEN', 'NEW', 'NOT', 'NOW', 'OLD', 'ONE', 'OUR', 'OUT', 'PAN', 'PAY', 'PUT', 'RAN',
   'RED', 'RUN', 'SAY', 'SEE', 'SET', 'SHE', 'SIN', 'SON', 'SOW', 'SUN', 'THE', 'THY', 'TIE', 'TOO', 'TOP', 'TWO', 'USE', 'WAR', 'WAY', 'WHO', 'WHY',
-  'WIN', 'YES', 'YET', 'YOU'
+  'WIN', 'YES', 'YET', 'YOU',
+  // Common 4-letter bridge words
+  'ABLE', 'AGED', 'ALSO', 'AWAY', 'BACK', 'BEAR', 'BEAT', 'BIRD', 'BLOW', 'BODY', 'BOLD', 'BOND', 'BONE', 'BORN', 'BOWS', 'BURN',
+  'CALL', 'CAME', 'CARE', 'CAST', 'CITY', 'CLAY', 'COME', 'CORN', 'DARK', 'DEAR', 'DEEP', 'DOOR', 'DOWN', 'DRAW', 'DUST', 'EACH',
+  'EARS', 'EAST', 'EVEN', 'EVER', 'EVIL', 'EYES', 'FACE', 'FAIL', 'FAIR', 'FALL', 'FAST', 'FEAR', 'FEET', 'FELL', 'FILL', 'FIND',
+  'FINE', 'FIRE', 'FISH', 'FLED', 'FLOW', 'FOLD', 'FOOD', 'FOOL', 'FOOT', 'FREE', 'FROM', 'FULL', 'GAVE', 'GIFT', 'GIVE', 'GLAD',
+  'GOES', 'GOLD', 'GONE', 'GOOD', 'GREW', 'GROW', 'HAND', 'HARD', 'HAVE', 'HEAD', 'HEAR', 'HELD', 'HELL', 'HELP', 'HERE', 'HIDE',
+  'HIGH', 'HILL', 'HOLD', 'HOLY', 'HOME', 'HOPE', 'HORN', 'HOST', 'HOUR', 'INTO', 'IRON', 'JOIN', 'JUST', 'KEEP', 'KEPT', 'KILL',
+  'KIND', 'KING', 'KNEW', 'KNOW', 'LAID', 'LAMB', 'LAND', 'LAST', 'LATE', 'LEAD', 'LEAP', 'LEFT', 'LIFE', 'LIFT', 'LIKE', 'LION',
+  'LIVE', 'LONG', 'LOOK', 'LORD', 'LOVE', 'MADE', 'MAKE', 'MANY', 'MEAT', 'MEET', 'MELT', 'MIND', 'MINE', 'MORN', 'MOST', 'MOVE',
+  'MUCH', 'NAME', 'NEAR', 'NEED', 'NEXT', 'NIGHT', 'NOON', 'NONE', 'OATH', 'ONCE', 'ONLY', 'OPEN', 'OVER', 'PAIN', 'PALM', 'PASS',
+  'PAST', 'PATH', 'POOR', 'POUR', 'PRAY', 'PURE', 'RAIN', 'READ', 'REED', 'REST', 'RICH', 'RIDE', 'RING', 'RISE', 'ROAD', 'ROBE',
+  'ROCK', 'ROSE', 'RULE', 'SAFE', 'SAID', 'SAKE', 'SALT', 'SAME', 'SAND', 'SAVE', 'SEAL', 'SEED', 'SEEK', 'SEEN', 'SEND', 'SENT',
+  'SHED', 'SHIP', 'SHOW', 'SHUT', 'SICK', 'SIDE', 'SIGHT', 'SIGN', 'SING', 'SINK', 'SITE', 'SLOW', 'SNOW', 'SOIL', 'SONG', 'SOON',
+  'SOUL', 'STAR', 'STAY', 'STEM', 'STEP', 'SUCH', 'SURE', 'TAKE', 'TALL', 'TEAR', 'TELL', 'TEST', 'THAN', 'THAT', 'THEM', 'THEN',
+  'THEY', 'THIS', 'THUS', 'TIME', 'TOLD', 'TOOK', 'TOWN', 'TREE', 'TRUE', 'TURN', 'VAIN', 'VINE', 'VOICE', 'WAIT', 'WAKE', 'WALK',
+  'WALL', 'WARM', 'WARN', 'WASH', 'WAVE', 'WEAK', 'WEEP', 'WELL', 'WENT', 'WEST', 'WIDE', 'WIFE', 'WILD', 'WILL', 'WIND', 'WINE',
+  'WING', 'WIPE', 'WISE', 'WISH', 'WITH', 'WOLF', 'WOOD', 'WOOL', 'WORD', 'WORK', 'WORM', 'YEAR', 'ZEAL'
 ];
 
 COMMON_CROSSWORDS.forEach((w) => SCRIPTURE_WORD_SET.add(w));
