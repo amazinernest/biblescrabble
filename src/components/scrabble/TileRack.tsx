@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { ScrabbleTile } from '@/lib/scrabbleEngine';
-import { Shuffle, RotateCcw, RefreshCw, Sparkles, Hand } from 'lucide-react';
+import { Shuffle, RotateCcw, RefreshCw, Sparkles } from 'lucide-react';
 
 interface TileRackProps {
   rack: ScrabbleTile[];
@@ -13,6 +13,7 @@ interface TileRackProps {
   onRecall: () => void;
   onOpenSwapModal: () => void;
   onDropTileOnSquare?: (row: number, col: number, tile: ScrabbleTile) => void;
+  onRecallTile?: (tile: ScrabbleTile, origin?: { row: number; col: number }) => void;
   disabled?: boolean;
 }
 
@@ -25,10 +26,12 @@ export default function TileRack({
   onRecall,
   onOpenSwapModal,
   onDropTileOnSquare,
+  onRecallTile,
   disabled = false,
 }: TileRackProps) {
   const [touchDraggingTile, setTouchDraggingTile] = useState<ScrabbleTile | null>(null);
   const [touchPos, setTouchPos] = useState<{ x: number; y: number } | null>(null);
+  const [isRackDragOver, setIsRackDragOver] = useState(false);
   const activeTouchTileRef = useRef<ScrabbleTile | null>(null);
 
   // Desktop HTML5 Drag Start
@@ -37,6 +40,34 @@ export default function TileRack({
     e.dataTransfer.setData('text/plain', JSON.stringify(tile));
     e.dataTransfer.effectAllowed = 'move';
     onSelectTile(tile);
+  };
+
+  const handleRackDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    if (!isRackDragOver) setIsRackDragOver(true);
+  };
+
+  const handleRackDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsRackDragOver(false);
+  };
+
+  const handleRackDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsRackDragOver(false);
+    try {
+      const originSquareStr = e.dataTransfer.getData('origin-square');
+      const tileDataStr =
+        e.dataTransfer.getData('application/json') || e.dataTransfer.getData('text/plain');
+      if (originSquareStr && tileDataStr && onRecallTile) {
+        const originSquare = JSON.parse(originSquareStr);
+        const tile = JSON.parse(tileDataStr);
+        onRecallTile(tile, originSquare);
+      }
+    } catch (err) {
+      console.warn('Rack drop error:', err);
+    }
   };
 
   // Mobile Touch Drag handlers
@@ -86,7 +117,7 @@ export default function TileRack({
 
   return (
     <div className="w-full max-w-2xl mx-auto flex flex-col items-center select-none space-y-3 px-1">
-      {/* FLOATING TOUCH DRAG GHOST (FOR MOBILE / TOUCHSCREENS) */}
+      {/* FLOATING TOUCH DRAG GHOST */}
       {touchDraggingTile && touchPos && (
         <div
           className="fixed pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2 w-14 h-18 sm:w-16 sm:h-20 rounded-2xl ivory-tile-3d flex flex-col items-center justify-between p-2 shadow-2xl scale-110 ring-4 ring-amber-400"
@@ -102,14 +133,22 @@ export default function TileRack({
       )}
 
       {/* EXPANDED PURE WHITE & GOLD RACK PEDESTAL */}
-      <div className="w-full p-3.5 sm:p-5 rounded-3xl temple-board-bezel relative flex items-center justify-center gap-2 sm:gap-4 shadow-xl">
+      <div
+        data-tile-rack="true"
+        onDragOver={handleRackDragOver}
+        onDragLeave={handleRackDragLeave}
+        onDrop={handleRackDrop}
+        className={`w-full p-3.5 sm:p-5 rounded-3xl temple-board-bezel relative flex items-center justify-center gap-2 sm:gap-4 shadow-xl transition-all ${
+          isRackDragOver ? 'ring-4 ring-amber-400 bg-amber-50 scale-102' : ''
+        }`}
+      >
         {/* Rack Gold Highlight Ridges */}
         <div className="absolute top-1.5 left-6 right-6 h-1 bg-amber-400/30 rounded-full blur-[0.5px] pointer-events-none" />
         <div className="absolute bottom-2 left-6 right-6 h-1.5 bg-amber-600/10 rounded-full pointer-events-none" />
 
         {rack.length === 0 ? (
           <span className="text-xs sm:text-sm text-amber-900/80 italic py-4 font-serif font-bold">
-            All tiles placed on the board! Press “Play Word” to submit your score.
+            All tiles placed on the board! Drag back here to recall, or press “Play Word”.
           </span>
         ) : (
           rack.map((tile) => {

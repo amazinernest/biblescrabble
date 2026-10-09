@@ -304,15 +304,52 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
     }
   };
 
-  // Handle tile placement on board square
-  const handlePlaceTileOnSquare = (row: number, col: number, tile: ScrabbleTile) => {
+  // Handle tile placement or repositioning on board square
+  const handlePlaceTileOnSquare = (
+    row: number,
+    col: number,
+    tile: ScrabbleTile,
+    originSquare?: { row: number; col: number }
+  ) => {
     if (!isMyTurn || isAiThinking || isGameOver) return;
 
     if (board[row][col].tile !== null) {
-      showToast('Square is already occupied!');
+      showToast('Square is already occupied by a played word!');
       return;
     }
 
+    // 1. Relocating a tile that was ALREADY placed on the board (from originSquare)
+    if (originSquare) {
+      // If dropped onto the exact same square, do nothing
+      if (originSquare.row === row && originSquare.col === col) return;
+
+      const targetExisting = tempPlacements.find((p) => p.row === row && p.col === col);
+      if (targetExisting) {
+        // Swap positions of the two temporary tiles
+        setTempPlacements((prev) =>
+          prev.map((p) => {
+            if (p.row === originSquare.row && p.col === originSquare.col) {
+              return { row: originSquare.row, col: originSquare.col, tile: targetExisting.tile };
+            }
+            if (p.row === row && p.col === col) {
+              return { row, col, tile };
+            }
+            return p;
+          })
+        );
+      } else {
+        // Move the tile to the new empty square
+        setTempPlacements((prev) => [
+          ...prev.filter((p) => !(p.row === originSquare.row && p.col === originSquare.col)),
+          { row, col, tile },
+        ]);
+      }
+      audioEngine.playClick();
+      setSelectedRackTile(null);
+      return;
+    }
+
+    // 2. Placing a tile from the RACK onto the board
     const existingTemp = tempPlacements.find((p) => p.row === row && p.col === col);
     if (existingTemp) {
       updateActiveRack((prev) => [...prev.filter((t) => t.id !== tile.id), existingTemp.tile]);
@@ -781,6 +818,11 @@ export default function ScrabbleGame({ onBack }: ScrabbleGameProps) {
         onRecall={handleRecallTiles}
         onOpenSwapModal={() => setIsSwapModalOpen(true)}
         onDropTileOnSquare={handlePlaceTileOnSquare}
+        onRecallTile={(tile, origin) => {
+          if (origin) {
+            handleSelectPlacedTile({ row: origin.row, col: origin.col, tile });
+          }
+        }}
         disabled={!isMyTurn || isAiThinking || isGameOver}
       />
 
